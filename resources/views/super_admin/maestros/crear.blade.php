@@ -3,10 +3,10 @@
     <div class="col-md-12">
         <div class="card">
             <div class="card-header">
-                <h4>Maestros</h4>
+                <h4>Crear maestro</h4>
             </div>
             <div class="card-body">
-                <maestro></maestro>
+                <maestro-crear></maestro-crear>
             </div>
         </div>
     </div>

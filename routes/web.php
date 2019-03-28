@@ -35,5 +35,6 @@ Route::put('/instituciones/status/{id}','Super\InstitucionesController@changeSta
 Route::get('/grupos','Super\GrupoController@index')->name('grupos.index');
 
 Route::get('/maestros','Super\MaestroController@indexVista')->name('maestro.index');
+Route::get('/maestros/crear','Super\MaestroController@crear');
 
 Route::get('/home', 'HomeController@index')->name('home');

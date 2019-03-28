@@ -31,12 +31,12 @@ Validator.localize('es',validatorEs);
 
 // const files = require.context('./', true, /\.vue$/i);
 // files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default));
-
-Vue.component('example-component', require('./components/ExampleComponent.vue').default);
 Vue.component('crear-institucion',require('./components/Institucion/CrearInstitucion.vue').default);
 Vue.component('editar-institucion',require('./components/Institucion/EditarInstitucion.vue').default);
 Vue.component('principal',require('./components/Institucion/Principal.vue').default);
 Vue.component('principal-grupo',require('./components/Grupo/PrincipalGrupo.vue').default);
+Vue.component('maestro',require('./components/Maestro/Maestro.vue').default);
+Vue.component('maestro-crear',require('./components/Maestro/MaestroCrear.vue').default);
 /**
  * Next, we will create a fresh Vue application instance and attach it to
  * the page. Then, you may begin adding components to this application

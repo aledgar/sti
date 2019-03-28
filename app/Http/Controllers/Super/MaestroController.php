@@ -23,4 +23,8 @@ class MaestroController extends Controller
             ->select('')
             ->get();
     }
+
+    public function crear(){
+        return view('super_admin.maestros.crear');
+    }
 }
