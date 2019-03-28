@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Maestro extends Model
 {
     protected $table = 'maestros';
-    protected $fillable = ['telefono','foto'];
+    protected $primaryKey = 'id';
+    protected $fillable = ['telefono','foto','id_user'];
     public $timestamps = true;
 }

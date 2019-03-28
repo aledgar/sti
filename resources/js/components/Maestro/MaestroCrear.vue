@@ -62,6 +62,7 @@
 </template>
 
 <script>
+    import swal from 'sweetalert';
     export default {
         name: "MaestroCrear",
         data() {
@@ -103,6 +104,25 @@
                     .then((response)=>{
                         console.log('entra');
                         console.log(response.data.errors);
+
+                        if(response.data.exito !== undefined){
+                            this.maestro.image='';
+                            this.maestro.nombre='';
+                            this.maestro.apellido='';
+                            this.maestro.email='';
+                            this.maestro.telefono='';
+                            this.maestro.contra='';
+                            $("#edicionInst").modal('hide');
+                            swal({
+                                icon: "success",
+                                title: "Se ha creado el maestro.",
+                            }).then((ok)=>{
+                                if(ok){
+                                    window.location = '/maestros';
+                                }
+                            });
+                        }
+
                         if(response.data.errors!==undefined){
                             this.errores = response.data.errors;
                         }

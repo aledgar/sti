@@ -25,13 +25,20 @@
                     <th>Foto *</th>
                     <th>Nombre(s)</th>
                     <th>Apellido(s)</th>
-                    <th>Institución</th>
                     <th> Teléfono</th>
                     <th>Email</th>
                     <th>Opciones</th>
                     </thead>
                     <tbody>
-
+                        <tr v-for="(maestro,index) in maestros">
+                            <td>{{index+1}}</td>
+                            <td><img style="height: 50px; width:50px; border-radius: 50%" :src="getImg(maestro.foto)" :alt="'maestro.name'"></td>
+                            <td>{{maestro.name}}</td>
+                            <td>{{maestro.lastname}}</td>
+                            <td>{{maestro.telefono}}</td>
+                            <td>{{maestro.email}}</td>
+                            <td>op</td>
+                        </tr>
                     </tbody>
                 </table>
             </div>
@@ -51,6 +58,32 @@
             return {
                 maestros: [],
                 textSearch: ''
+            }
+        },
+        mounted() {
+            this.getMaestros();
+        },
+        computed:{
+
+        },
+        methods:{
+            getMaestros()
+            {
+                axios.get('/maestros/api')
+                    .then((response)=>{
+                        this.maestros = response.data;
+                    })
+                    .catch((err)=>{
+                        console.log(err.data);
+                    });
+            },
+            getImg(img){
+                if(img==='' || img === undefined || img === null){
+                    console.log(img);
+                    return '/images/maestros/nofoto.png';
+                }else{
+                    return '/images/maestros/'+img;
+                }
             }
         }
     }

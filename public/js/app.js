@@ -2176,6 +2176,13 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "Maestro",
   data: function data() {
@@ -2183,6 +2190,29 @@ __webpack_require__.r(__webpack_exports__);
       maestros: [],
       textSearch: ''
     };
+  },
+  mounted: function mounted() {
+    this.getMaestros();
+  },
+  computed: {},
+  methods: {
+    getMaestros: function getMaestros() {
+      var _this = this;
+
+      axios.get('/maestros/api').then(function (response) {
+        _this.maestros = response.data;
+      }).catch(function (err) {
+        console.log(err.data);
+      });
+    },
+    getImg: function getImg(img) {
+      if (img === '' || img === undefined || img === null) {
+        console.log(img);
+        return '/images/maestros/nofoto.png';
+      } else {
+        return '/images/maestros/' + img;
+      }
+    }
   }
 });
 
@@ -2197,6 +2227,8 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony import */ var sweetalert__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! sweetalert */ "./node_modules/sweetalert/dist/sweetalert.min.js");
+/* harmony import */ var sweetalert__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(sweetalert__WEBPACK_IMPORTED_MODULE_0__);
 //
 //
 //
@@ -2260,6 +2292,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "MaestroCrear",
   data: function data() {
@@ -2303,6 +2336,24 @@ __webpack_require__.r(__webpack_exports__);
       axios.post('/maestros/crear', formData, config).then(function (response) {
         console.log('entra');
         console.log(response.data.errors);
+
+        if (response.data.exito !== undefined) {
+          _this.maestro.image = '';
+          _this.maestro.nombre = '';
+          _this.maestro.apellido = '';
+          _this.maestro.email = '';
+          _this.maestro.telefono = '';
+          _this.maestro.contra = '';
+          $("#edicionInst").modal('hide');
+          sweetalert__WEBPACK_IMPORTED_MODULE_0___default()({
+            icon: "success",
+            title: "Se ha creado el maestro."
+          }).then(function (ok) {
+            if (ok) {
+              window.location = '/maestros';
+            }
+          });
+        }
 
         if (response.data.errors !== undefined) {
           _this.errores = response.data.errors;
@@ -48999,7 +49050,45 @@ var render = function() {
     _vm._v(" "),
     _c("div", { staticClass: "row" }, [
       _vm.maestros.length
-        ? _c("div", { staticClass: "col-md-12 table-responsive" }, [_vm._m(1)])
+        ? _c("div", { staticClass: "col-md-12 table-responsive" }, [
+            _c("table", { staticClass: "table table-bordered table-hover" }, [
+              _vm._m(1),
+              _vm._v(" "),
+              _c(
+                "tbody",
+                _vm._l(_vm.maestros, function(maestro, index) {
+                  return _c("tr", [
+                    _c("td", [_vm._v(_vm._s(index + 1))]),
+                    _vm._v(" "),
+                    _c("td", [
+                      _c("img", {
+                        staticStyle: {
+                          height: "50px",
+                          width: "50px",
+                          "border-radius": "50%"
+                        },
+                        attrs: {
+                          src: _vm.getImg(maestro.foto),
+                          alt: "maestro.name"
+                        }
+                      })
+                    ]),
+                    _vm._v(" "),
+                    _c("td", [_vm._v(_vm._s(maestro.name))]),
+                    _vm._v(" "),
+                    _c("td", [_vm._v(_vm._s(maestro.lastname))]),
+                    _vm._v(" "),
+                    _c("td", [_vm._v(_vm._s(maestro.telefono))]),
+                    _vm._v(" "),
+                    _c("td", [_vm._v(_vm._s(maestro.email))]),
+                    _vm._v(" "),
+                    _c("td", [_vm._v("op")])
+                  ])
+                }),
+                0
+              )
+            ])
+          ])
         : _c("div", { staticClass: "col-md-12" }, [_vm._m(2)])
     ])
   ])
@@ -49021,26 +49110,20 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("table", { staticClass: "table table-bordered table-hover" }, [
-      _c("thead", [
-        _c("th", [_vm._v("#")]),
-        _vm._v(" "),
-        _c("th", [_vm._v("Foto *")]),
-        _vm._v(" "),
-        _c("th", [_vm._v("Nombre(s)")]),
-        _vm._v(" "),
-        _c("th", [_vm._v("Apellido(s)")]),
-        _vm._v(" "),
-        _c("th", [_vm._v("Institución")]),
-        _vm._v(" "),
-        _c("th", [_vm._v(" Teléfono")]),
-        _vm._v(" "),
-        _c("th", [_vm._v("Email")]),
-        _vm._v(" "),
-        _c("th", [_vm._v("Opciones")])
-      ]),
+    return _c("thead", [
+      _c("th", [_vm._v("#")]),
       _vm._v(" "),
-      _c("tbody")
+      _c("th", [_vm._v("Foto *")]),
+      _vm._v(" "),
+      _c("th", [_vm._v("Nombre(s)")]),
+      _vm._v(" "),
+      _c("th", [_vm._v("Apellido(s)")]),
+      _vm._v(" "),
+      _c("th", [_vm._v(" Teléfono")]),
+      _vm._v(" "),
+      _c("th", [_vm._v("Email")]),
+      _vm._v(" "),
+      _c("th", [_vm._v("Opciones")])
     ])
   },
   function() {
