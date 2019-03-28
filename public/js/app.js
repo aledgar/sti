@@ -49096,7 +49096,7 @@ var render = function() {
                     staticStyle: { "text-align": "justify !important" }
                   },
                   [
-                    _c("h7", [_vm._v("Error(es)!")]),
+                    _c("h4", [_vm._v("Error(es)!")]),
                     _vm._v(" "),
                     _c(
                       "ul",
@@ -49111,8 +49111,7 @@ var render = function() {
                       }),
                       0
                     )
-                  ],
-                  1
+                  ]
                 )
               ])
             ])

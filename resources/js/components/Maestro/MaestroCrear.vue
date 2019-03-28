@@ -4,7 +4,7 @@
                 <div class="row" v-if="errores.length">
                     <div class="col-md-12">
                         <div class="alert alert-danger" style="text-align: justify !important;">
-                            <h7>Error(es)!</h7>
+                            <h4>Error(es)!</h4>
                             <ul>
                                 <li v-for="error in errores">
                                     {{error}}
