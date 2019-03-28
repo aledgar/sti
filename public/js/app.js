@@ -2248,11 +2248,32 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "MaestroCrear",
   data: function data() {
     return {
-      subirFoto: false
+      subirFoto: false,
+      maestro: {
+        nombre: '',
+        apellido: '',
+        email: '',
+        contra: '',
+        telefono: '',
+        image: ''
+      },
+      errores: []
     };
   },
   methods: {
@@ -2262,8 +2283,37 @@ __webpack_require__.r(__webpack_exports__);
     noAgregarImg: function noAgregarImg() {
       this.subirFoto = false;
     },
-    agregarMaestro: function agregarMaestro() {
-      alert('agregar');
+    agregarMaestro: function agregarMaestro(e) {
+      var _this = this;
+
+      e.preventDefault();
+      this.errores = [];
+      var config = {
+        headers: {
+          'Content-Type': 'multipart/form-data'
+        }
+      };
+      var formData = new FormData();
+      formData.append('image', this.maestro.image);
+      formData.append('nombre', this.maestro.nombre);
+      formData.append('apellido', this.maestro.apellido);
+      formData.append('email', this.maestro.email);
+      formData.append('telefono', this.maestro.telefono);
+      formData.append('contra', this.maestro.contra);
+      axios.post('/maestros/crear', formData, config).then(function (response) {
+        console.log('entra');
+        console.log(response.data.errors);
+
+        if (response.data.errors !== undefined) {
+          _this.errores = response.data.errors;
+        }
+      }).catch(function (err) {
+        console.log(err.data);
+      });
+    },
+    onImageChange: function onImageChange(e) {
+      console.log(e.target.files[0]);
+      this.maestro.image = e.target.files[0];
     }
   }
 });
@@ -49026,6 +49076,7 @@ var render = function() {
   return _c(
     "form",
     {
+      attrs: { enctype: "multipart/form-data" },
       on: {
         submit: function($event) {
           $event.preventDefault()
@@ -49035,11 +49086,173 @@ var render = function() {
     },
     [
       _c("div", [
-        _vm._m(0),
+        _vm.errores.length
+          ? _c("div", { staticClass: "row" }, [
+              _c("div", { staticClass: "col-md-12" }, [
+                _c(
+                  "div",
+                  {
+                    staticClass: "alert alert-danger",
+                    staticStyle: { "text-align": "justify !important" }
+                  },
+                  [
+                    _c("h7", [_vm._v("Error(es)!")]),
+                    _vm._v(" "),
+                    _c(
+                      "ul",
+                      _vm._l(_vm.errores, function(error) {
+                        return _c("li", [
+                          _vm._v(
+                            "\n                                " +
+                              _vm._s(error) +
+                              "\n                            "
+                          )
+                        ])
+                      }),
+                      0
+                    )
+                  ],
+                  1
+                )
+              ])
+            ])
+          : _vm._e(),
+        _vm._v(" "),
+        _c("div", { staticClass: "row" }, [
+          _c("div", { staticClass: "col-md-6" }, [
+            _c("label", { attrs: { for: "" } }, [_vm._v("Nombre(s):")]),
+            _vm._v(" "),
+            _c("input", {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.maestro.nombre,
+                  expression: "maestro.nombre"
+                }
+              ],
+              staticClass: "form-control",
+              attrs: { type: "text", placeholder: "Nombre(s)" },
+              domProps: { value: _vm.maestro.nombre },
+              on: {
+                input: function($event) {
+                  if ($event.target.composing) {
+                    return
+                  }
+                  _vm.$set(_vm.maestro, "nombre", $event.target.value)
+                }
+              }
+            })
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "col-md-6" }, [
+            _c("label", { attrs: { for: "" } }, [_vm._v("Apellido(s):")]),
+            _vm._v(" "),
+            _c("input", {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.maestro.apellido,
+                  expression: "maestro.apellido"
+                }
+              ],
+              staticClass: "form-control",
+              attrs: { type: "text", placeholder: "Apellido(s)" },
+              domProps: { value: _vm.maestro.apellido },
+              on: {
+                input: function($event) {
+                  if ($event.target.composing) {
+                    return
+                  }
+                  _vm.$set(_vm.maestro, "apellido", $event.target.value)
+                }
+              }
+            })
+          ])
+        ]),
         _vm._v(" "),
         _c("br"),
         _vm._v(" "),
-        _vm._m(1),
+        _c("div", { staticClass: "row" }, [
+          _c("div", { staticClass: "col-md-4" }, [
+            _c("label", { attrs: { for: "" } }, [_vm._v("Email:")]),
+            _vm._v(" "),
+            _c("input", {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.maestro.email,
+                  expression: "maestro.email"
+                }
+              ],
+              staticClass: "form-control",
+              attrs: { type: "email", placeholder: "Eg, email@mail.mx" },
+              domProps: { value: _vm.maestro.email },
+              on: {
+                input: function($event) {
+                  if ($event.target.composing) {
+                    return
+                  }
+                  _vm.$set(_vm.maestro, "email", $event.target.value)
+                }
+              }
+            })
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "col-md-4" }, [
+            _c("label", { attrs: { for: "" } }, [_vm._v("Contraseña:")]),
+            _vm._v(" "),
+            _c("input", {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.maestro.contra,
+                  expression: "maestro.contra"
+                }
+              ],
+              staticClass: "form-control",
+              attrs: { type: "password", placeholder: "Contraseña" },
+              domProps: { value: _vm.maestro.contra },
+              on: {
+                input: function($event) {
+                  if ($event.target.composing) {
+                    return
+                  }
+                  _vm.$set(_vm.maestro, "contra", $event.target.value)
+                }
+              }
+            })
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "col-md-4" }, [
+            _c("label", { attrs: { for: "" } }, [_vm._v("Teléfono:")]),
+            _vm._v(" "),
+            _c("input", {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.maestro.telefono,
+                  expression: "maestro.telefono"
+                }
+              ],
+              staticClass: "form-control",
+              attrs: { type: "text", placeholder: "Teléfono" },
+              domProps: { value: _vm.maestro.telefono },
+              on: {
+                input: function($event) {
+                  if ($event.target.composing) {
+                    return
+                  }
+                  _vm.$set(_vm.maestro, "telefono", $event.target.value)
+                }
+              }
+            })
+          ])
+        ]),
         _vm._v(" "),
         _c("br"),
         _vm._v(" "),
@@ -49057,7 +49270,16 @@ var render = function() {
               ])
             ])
           : _c("div", { staticClass: "row" }, [
-              _vm._m(2),
+              _c("div", { staticClass: "float-left" }, [
+                _c("label", { attrs: { for: "" } }, [
+                  _vm._v("Agregue una foto:")
+                ]),
+                _vm._v(" "),
+                _c("input", {
+                  attrs: { type: "file" },
+                  on: { change: _vm.onImageChange }
+                })
+              ]),
               _vm._v(" "),
               _c(
                 "button",
@@ -49072,87 +49294,12 @@ var render = function() {
         _vm._v(" "),
         _c("br"),
         _vm._v(" "),
-        _vm._m(3)
+        _vm._m(0)
       ])
     ]
   )
 }
 var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "row" }, [
-      _c("div", { staticClass: "col-md-6" }, [
-        _c("label", { attrs: { for: "nombre" } }, [_vm._v("Nombre(s):")]),
-        _vm._v(" "),
-        _c("input", {
-          staticClass: "form-control",
-          attrs: { type: "text", name: "nombre", placeholder: "Nombre(s)" }
-        })
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "col-md-6" }, [
-        _c("label", { attrs: { for: "apellido" } }, [_vm._v("Apellido(s):")]),
-        _vm._v(" "),
-        _c("input", {
-          staticClass: "form-control",
-          attrs: { type: "text", name: "apellido", placeholder: "Apellido(s)" }
-        })
-      ])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "row" }, [
-      _c("div", { staticClass: "col-md-4" }, [
-        _c("label", { attrs: { for: "email" } }, [_vm._v("Email:")]),
-        _vm._v(" "),
-        _c("input", {
-          staticClass: "form-control",
-          attrs: {
-            type: "email",
-            name: "email",
-            placeholder: "Eg, email@mail.mx"
-          }
-        })
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "col-md-4" }, [
-        _c("label", { attrs: { for: "contraseña" } }, [_vm._v("Contraseña:")]),
-        _vm._v(" "),
-        _c("input", {
-          staticClass: "form-control",
-          attrs: {
-            type: "password",
-            name: "contraseña",
-            placeholder: "Contraseña"
-          }
-        })
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "col-md-4" }, [
-        _c("label", { attrs: { for: "telefono" } }, [_vm._v("Teléfono:")]),
-        _vm._v(" "),
-        _c("input", {
-          staticClass: "form-control",
-          attrs: { type: "text", name: "telefono", placeholder: "Teléfono" }
-        })
-      ])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "float-left" }, [
-      _c("label", { attrs: { for: "foto" } }, [_vm._v("Agregue una foto:")]),
-      _vm._v(" "),
-      _c("input", { attrs: { type: "file", name: "foto" } })
-    ])
-  },
   function() {
     var _vm = this
     var _h = _vm.$createElement
