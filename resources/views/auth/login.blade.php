@@ -124,7 +124,7 @@
 <div id="loginbox">
     <form method="POST" action="{{ route('login') }}">
         @csrf
-        <div class="control-group normal_text"><h3>STI UAA{}</h3></div>
+        <div class="control-group normal_text"><h3>STI UAA</h3></div>
         <div class="control-group">
             <div class="controls">
                 <div class="main_input_box">
