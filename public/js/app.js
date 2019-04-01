@@ -2183,6 +2183,10 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "Maestro",
   data: function data() {
@@ -49082,14 +49086,14 @@ var render = function() {
                     _vm._v(" "),
                     _c("td", [_vm._v(_vm._s(maestro.email))]),
                     _vm._v(" "),
-                    _c("td", [_vm._v("op")])
+                    _vm._m(2, true)
                   ])
                 }),
                 0
               )
             ])
           ])
-        : _c("div", { staticClass: "col-md-12" }, [_vm._m(2)])
+        : _c("div", { staticClass: "col-md-12" }, [_vm._m(3)])
     ])
   ])
 }
@@ -49124,6 +49128,18 @@ var staticRenderFns = [
       _c("th", [_vm._v("Email")]),
       _vm._v(" "),
       _c("th", [_vm._v("Opciones")])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("td", [
+      _c("button", { staticClass: "btn btn-success" }, [
+        _vm._v(
+          "\n                                Editar\n                            "
+        )
+      ])
     ])
   },
   function() {

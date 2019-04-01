@@ -37,7 +37,11 @@
                             <td>{{maestro.lastname}}</td>
                             <td>{{maestro.telefono}}</td>
                             <td>{{maestro.email}}</td>
-                            <td>op</td>
+                            <td>
+                                <button class="btn btn-success">
+                                    Editar
+                                </button>
+                            </td>
                         </tr>
                     </tbody>
                 </table>
