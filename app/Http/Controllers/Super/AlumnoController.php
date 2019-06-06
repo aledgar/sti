@@ -7,6 +7,12 @@ use App\Http\Controllers\Controller;
 
 class AlumnoController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+        $this->middleware('super-admin');
+    }
+
     /**
      * Display a listing of the resource.
      *

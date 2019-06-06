@@ -37,6 +37,14 @@ Vue.component('principal',require('./components/Institucion/Principal.vue').defa
 Vue.component('principal-grupo',require('./components/Grupo/PrincipalGrupo.vue').default);
 Vue.component('maestro',require('./components/Maestro/Maestro.vue').default);
 Vue.component('maestro-crear',require('./components/Maestro/MaestroCrear.vue').default);
+Vue.component('maestro-editar',require('./components/Maestro/MaestroEditar.vue').default);
+Vue.component('carreras',require('./components/Carreras/CarrerasComponent').default);
+//COMPONENTES DE MAESTROS
+Vue.component('maestro-insitucion',require('./components/MaestrosComponents/Instituciones/Instituciones.vue').default);
+Vue.component('grupo',require('./components/MaestrosComponents/Grupos/GrupoComponent').default);
+//COMPONENTES DE ALUMNOS
+Vue.component('felder',require('./components/AlumnosComponents/FelderComponent').default);
+Vue.component('conocimiento',require('./components/AlumnosComponents/ConocimientoComponent').default);
 /**
  * Next, we will create a fresh Vue application instance and attach it to
  * the page. Then, you may begin adding components to this application

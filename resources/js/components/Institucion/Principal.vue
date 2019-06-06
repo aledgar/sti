@@ -1,6 +1,6 @@
 <template>
     <div class="col-md-12">
-        <div class="card">
+        <div class="card shadow">
             <div class="card-header">
                 <h4>Instituciones</h4>
             </div>

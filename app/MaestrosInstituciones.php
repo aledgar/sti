@@ -8,7 +8,7 @@ class MaestrosInstituciones extends Model
 {
     protected $table = 'maestros_instituciones';
     protected $primaryKey = 'id';
-    protected $attributes = ['id_maestro','id_institucion','deleted'];
+    protected $fillable = ['id_maestro','id_institucion','deleted'];
     public $timestamps = false;
 
     public function maestros(){
